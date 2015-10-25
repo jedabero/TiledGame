@@ -1,5 +1,7 @@
 package com.jedabero.tiledgame;
 
+import com.jedabero.tiledgame.display.Display;
+
 /**
  * TiledGame com.jedabero.tiledgame.Launcher
  * Created by jedabero on 25/10/15.
@@ -7,7 +9,7 @@ package com.jedabero.tiledgame;
 public class Launcher {
 
     public static void main(String[] args) {
-        System.out.print("Hello TiledGame");
+        new Display("TiledGame", 300, 300);
     }
 
 }
