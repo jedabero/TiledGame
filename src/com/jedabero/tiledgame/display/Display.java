@@ -1,6 +1,7 @@
 package com.jedabero.tiledgame.display;
 
 import java.awt.Canvas;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -32,7 +33,17 @@ public class Display {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        canvas = new Canvas();
+        Dimension dimension = new Dimension(width, height);
+        canvas.setPreferredSize(dimension);
+        canvas.setMaximumSize(dimension);
+        canvas.setMinimumSize(dimension);
+
+        frame.add(canvas);
+        frame.pack();
     }
+
 
 
 }
