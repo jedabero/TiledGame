@@ -7,7 +7,7 @@ package com.jedabero.tiledgame;
 public class Launcher {
 
     public static void main(String[] args) {
-        Game game = new Game("TiledGame", 300, 300);
+        Game game = new Game("TiledGame", 640, 360);
         game.start();
     }
 

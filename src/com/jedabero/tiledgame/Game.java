@@ -2,6 +2,9 @@ package com.jedabero.tiledgame;
 
 import com.jedabero.tiledgame.display.Display;
 
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+
 /**
  * Game
  * Created by jedabero on 25/10/15.
@@ -14,6 +17,9 @@ public class Game implements Runnable {
 
     private boolean running = false;
     private Thread thread;
+
+    private BufferStrategy bufferStrategy;
+    private Graphics graphics;
 
     public Game (String title, int width, int height) {
         this.title = title;
@@ -30,7 +36,17 @@ public class Game implements Runnable {
     }
 
     private void render() {
-
+        bufferStrategy = display.getCanvas().getBufferStrategy();
+        if (bufferStrategy == null){
+            display.getCanvas().createBufferStrategy(3);
+            return;
+        }
+        graphics = bufferStrategy.getDrawGraphics();
+        /* Drawing section */
+        graphics.fillRect(0,0,width,height);
+        /* ENd Drawing section */
+        bufferStrategy.show();
+        graphics.dispose();
     }
 
     @Override
