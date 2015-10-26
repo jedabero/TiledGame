@@ -1,12 +1,10 @@
 package com.jedabero.tiledgame;
 
 import com.jedabero.tiledgame.display.Display;
-import com.jedabero.tiledgame.gfx.ImageLoader;
-import com.jedabero.tiledgame.gfx.SpriteSheet;
+import com.jedabero.tiledgame.gfx.Assets;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 /**
  * Game
@@ -30,12 +28,9 @@ public class Game implements Runnable {
         this.height = height;
     }
 
-    private BufferedImage testFace;
-    private SpriteSheet sheet;
     private void init() {
         display = new Display(title, width, height);
-        testFace = ImageLoader.loadImage("/textures/sheet.png");
-        sheet = new SpriteSheet(testFace);
+        Assets.init();
     }
 
     private void tick() {
@@ -53,8 +48,8 @@ public class Game implements Runnable {
         graphics.clearRect(0, 0, width, height);
         /* Drawing section */
 
-        graphics.drawImage(sheet.crop(0,0,32,32),10, 50, null);
-        graphics.drawImage(sheet.crop(32,0,32,32),50, 10, null);
+        graphics.drawImage(Assets.dirt, 10, 10, null);
+        graphics.drawImage(Assets.tree, 100, 10, null);
 
         /* ENd Drawing section */
         bufferStrategy.show();
