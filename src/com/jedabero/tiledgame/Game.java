@@ -2,9 +2,7 @@ package com.jedabero.tiledgame;
 
 import com.jedabero.tiledgame.display.Display;
 import com.jedabero.tiledgame.gfx.Assets;
-import com.jedabero.tiledgame.states.GameState;
-import com.jedabero.tiledgame.states.State;
-import com.jedabero.tiledgame.states.StateManager;
+import com.jedabero.tiledgame.states.*;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -25,7 +23,9 @@ public class Game implements Runnable {
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
 
-    private State state;
+    private GameState gameState;
+    private MenuState menuState;
+    private SettingsState settingsState;
 
     public Game (String title, int width, int height) {
         this.title = title;
@@ -37,8 +37,10 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         Assets.init();
 
-        state = new GameState();
-        StateManager.setState(state);
+        gameState = new GameState();
+        menuState = new MenuState();
+        settingsState = new SettingsState();
+        StateManager.setState(gameState);
     }
 
     private void tick() {

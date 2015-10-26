@@ -1,16 +1,12 @@
 package com.jedabero.tiledgame.states;
 
-import com.jedabero.tiledgame.gfx.Assets;
-
 import java.awt.*;
 
 /**
- * GameState
+ * MenuState
  * Created by jedabero on 25/10/15.
  */
-public class GameState implements State {
-
-    public GameState() { }
+public class MenuState implements State {
 
     @Override
     public void tick() {
