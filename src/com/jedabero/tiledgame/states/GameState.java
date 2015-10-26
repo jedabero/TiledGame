@@ -3,6 +3,7 @@ package com.jedabero.tiledgame.states;
 import com.jedabero.tiledgame.Game;
 import com.jedabero.tiledgame.entities.creatures.Player;
 import com.jedabero.tiledgame.tiles.TileManager;
+import com.jedabero.tiledgame.world.World;
 
 import java.awt.Graphics;
 
@@ -13,20 +14,23 @@ import java.awt.Graphics;
 public class GameState extends State {
 
     private Player player;
+    private World world;
 
     public GameState(Game game) {
         super(game);
         player = new Player(game, 100, 100);
+        world = new World("");
     }
 
     @Override
     public void tick() {
+        world.tick();
         player.tick();
     }
 
     @Override
     public void render(Graphics graphics) {
-        TileManager.tiles[0].render(graphics, 0, 0);
+        world.render(graphics);
         player.render(graphics);
     }
 }
