@@ -48,9 +48,6 @@ public class Game implements Runnable {
         graphics.clearRect(0, 0, width, height);
         /* Drawing section */
 
-        graphics.drawImage(Assets.dirt, 10, 10, null);
-        graphics.drawImage(Assets.tree, 100, 10, null);
-
         /* ENd Drawing section */
         bufferStrategy.show();
         graphics.dispose();
@@ -60,14 +57,32 @@ public class Game implements Runnable {
     public void run() {
         init();
 
+        int fps = 30;
+        double timePerTick = 1000000000 / fps;
+        double delta = 0;
+        long now;
+        long lastTime = System.nanoTime();
+        long timer = 0;
+        int ticks = 0;
+
         while (running) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            now = System.nanoTime();
+            long diff = now - lastTime;
+            delta += diff / timePerTick;
+            timer += diff;
+            lastTime = now;
+
+            if (delta >= 1) {
+                tick();
+                render();
+                delta--;
+                ticks++;
             }
-            tick();
-            render();
+            if (timer >= 1000000000){
+                System.out.println(String.format("Ticks and Frames: %d", ticks));
+                ticks = 0;
+                timer = 0;
+            }
         }
 
         stop();
