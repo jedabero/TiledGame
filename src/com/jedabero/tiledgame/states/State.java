@@ -1,5 +1,6 @@
 package com.jedabero.tiledgame.states;
 
+import com.jedabero.tiledgame.Game;
 import com.jedabero.tiledgame.common.Renderable;
 import com.jedabero.tiledgame.common.Updateable;
 
@@ -9,4 +10,9 @@ import com.jedabero.tiledgame.common.Updateable;
  */
 public abstract class State implements Updateable, Renderable {
 
+    protected Game game;
+
+    public State(Game game) {
+        this.game = game;
+    }
 }

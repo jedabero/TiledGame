@@ -27,23 +27,29 @@ public class Game implements Runnable {
     private MenuState menuState;
     private SettingsState settingsState;
 
+    private KeyManager keyManager;
+
     public Game (String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
+        keyManager = new KeyManager();
     }
 
     private void init() {
         display = new Display(title, width, height);
+        display.getFrame().addKeyListener(keyManager);
         Assets.init();
 
-        gameState = new GameState();
-        menuState = new MenuState();
-        settingsState = new SettingsState();
+        gameState = new GameState(this);
+        menuState = new MenuState(this);
+        settingsState = new SettingsState(this);
         StateManager.setState(gameState);
     }
 
     private void tick() {
+        keyManager.tick();
+
         if (StateManager.getState() != null)
             StateManager.getState().tick();
     }
@@ -118,4 +124,9 @@ public class Game implements Runnable {
             e.printStackTrace();
         }
     }
+
+    public KeyManager getKeyManager() {
+        return keyManager;
+    }
+
 }

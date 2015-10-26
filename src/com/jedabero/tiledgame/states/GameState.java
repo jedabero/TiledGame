@@ -1,5 +1,6 @@
 package com.jedabero.tiledgame.states;
 
+import com.jedabero.tiledgame.Game;
 import com.jedabero.tiledgame.entities.creatures.Player;
 
 import java.awt.Graphics;
@@ -12,8 +13,9 @@ public class GameState extends State {
 
     private Player player;
 
-    public GameState() {
-        player = new Player(100, 100);
+    public GameState(Game game) {
+        super(game);
+        player = new Player(game, 100, 100);
     }
 
     @Override

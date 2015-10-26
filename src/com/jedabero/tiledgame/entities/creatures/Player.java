@@ -1,5 +1,6 @@
 package com.jedabero.tiledgame.entities.creatures;
 
+import com.jedabero.tiledgame.Game;
 import com.jedabero.tiledgame.gfx.Assets;
 
 import java.awt.Graphics;
@@ -10,13 +11,27 @@ import java.awt.Graphics;
  */
 public class Player extends Creature {
 
-    public Player(float x, float y) {
+    private Game game;
+
+    public Player(Game game, float x, float y) {
         super(x, y);
+        this.game = game;
     }
 
     @Override
     public void tick() {
-
+        if (game.getKeyManager().up) {
+            position.y -= 3;
+        }
+        if (game.getKeyManager().down) {
+            position.y += 3;
+        }
+        if (game.getKeyManager().left) {
+            position.x -= 3;
+        }
+        if (game.getKeyManager().right) {
+            position.x += 3;
+        }
     }
 
     @Override
