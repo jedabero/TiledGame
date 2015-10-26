@@ -2,6 +2,7 @@ package com.jedabero.tiledgame.states;
 
 import com.jedabero.tiledgame.Game;
 import com.jedabero.tiledgame.entities.creatures.Player;
+import com.jedabero.tiledgame.tiles.TileManager;
 
 import java.awt.Graphics;
 
@@ -25,6 +26,7 @@ public class GameState extends State {
 
     @Override
     public void render(Graphics graphics) {
+        TileManager.tiles[0].render(graphics, 0, 0);
         player.render(graphics);
     }
 }
