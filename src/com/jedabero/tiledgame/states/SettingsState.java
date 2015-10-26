@@ -6,7 +6,8 @@ import java.awt.*;
  * SettingsState
  * Created by jedabero on 25/10/15.
  */
-public class SettingsState implements State {
+public class SettingsState extends State {
+
     @Override
     public void tick() {
 

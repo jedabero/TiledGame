@@ -1,15 +1,12 @@
 package com.jedabero.tiledgame.states;
 
-import java.awt.Graphics;
+import com.jedabero.tiledgame.common.Renderable;
+import com.jedabero.tiledgame.common.Updateable;
 
 /**
  * State
  * Created by jedabero on 25/10/15.
  */
-public interface State {
-
-    void tick();
-
-    void render(Graphics graphics);
+public abstract class State implements Updateable, Renderable {
 
 }

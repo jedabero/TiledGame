@@ -6,7 +6,7 @@ import java.awt.*;
  * MenuState
  * Created by jedabero on 25/10/15.
  */
-public class MenuState implements State {
+public class MenuState extends State {
 
     @Override
     public void tick() {
