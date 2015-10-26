@@ -1,9 +1,11 @@
 package com.jedabero.tiledgame;
 
 import com.jedabero.tiledgame.display.Display;
+import com.jedabero.tiledgame.gfx.ImageLoader;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 /**
  * Game
@@ -27,8 +29,10 @@ public class Game implements Runnable {
         this.height = height;
     }
 
+    private BufferedImage testFace;
     private void init() {
         display = new Display(title, width, height);
+        testFace = ImageLoader.loadImage("/textures/face.png");
     }
 
     private void tick() {
@@ -42,8 +46,14 @@ public class Game implements Runnable {
             return;
         }
         graphics = bufferStrategy.getDrawGraphics();
+        /* Clear screen */
+        graphics.clearRect(0, 0, width, height);
         /* Drawing section */
-        graphics.fillRect(0,0,width,height);
+
+        graphics.fillRect(4,5,24,25);
+
+        graphics.drawImage(testFace,10, 50, null);
+
         /* ENd Drawing section */
         bufferStrategy.show();
         graphics.dispose();
