@@ -57,10 +57,18 @@ public class World implements Updateable, Renderable {
 
     @Override
     public void render(Graphics graphics) {
+        int firstXTile = (int) (game.getGameCamera().getxOffset() / Tile.TILE_WIDTH);
+        int xStart = Math.max(0, firstXTile);
+        int firstYTile = (int) (game.getGameCamera().getyOffset() / Tile.TILE_HEIGHT);
+        int yStart = Math.max(0, firstYTile);
+        int lastXTile = (int) ((game.getGameCamera().getxOffset() + game.getWidth()) / Tile.TILE_WIDTH + 1);
+        int xEnd = Math.min(width,lastXTile);
+        int lastYTile = (int) ((game.getGameCamera().getyOffset() + game.getHeight()) / Tile.TILE_HEIGHT + 1);
+        int yEnd = Math.min(height, lastYTile);
         float xOffset = game.getGameCamera().getxOffset();
         float yOffset = game.getGameCamera().getyOffset();
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
+        for (int j = yStart; j < yEnd; j++) {
+            for (int i = xStart; i < xEnd; i++) {
                 int xPos = (int) (i * Tile.TILE_WIDTH - xOffset);
                 int yPos = (int) (j * Tile.TILE_HEIGHT - yOffset);
                 getTile(i, j).render(graphics, xPos, yPos);
