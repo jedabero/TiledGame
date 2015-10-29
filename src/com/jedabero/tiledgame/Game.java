@@ -2,6 +2,7 @@ package com.jedabero.tiledgame;
 
 import com.jedabero.tiledgame.display.Display;
 import com.jedabero.tiledgame.gfx.Assets;
+import com.jedabero.tiledgame.gfx.GameCamera;
 import com.jedabero.tiledgame.states.*;
 
 import java.awt.Graphics;
@@ -29,6 +30,8 @@ public class Game implements Runnable {
 
     private KeyManager keyManager;
 
+    private GameCamera gameCamera;
+
     public Game (String title, int width, int height) {
         this.title = title;
         this.width = width;
@@ -40,6 +43,8 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
+
+        gameCamera = new GameCamera(this, 0, 0);
 
         gameState = new GameState(this);
         menuState = new MenuState(this);
@@ -125,8 +130,19 @@ public class Game implements Runnable {
         }
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     public KeyManager getKeyManager() {
         return keyManager;
     }
 
+    public GameCamera getGameCamera() {
+        return gameCamera;
+    }
 }

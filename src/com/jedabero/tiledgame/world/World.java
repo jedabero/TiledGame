@@ -1,7 +1,9 @@
 package com.jedabero.tiledgame.world;
 
+import com.jedabero.tiledgame.Game;
 import com.jedabero.tiledgame.common.Renderable;
 import com.jedabero.tiledgame.common.Updateable;
+import com.jedabero.tiledgame.gfx.GameCamera;
 import com.jedabero.tiledgame.tiles.Tile;
 import com.jedabero.tiledgame.tiles.TileManager;
 import com.jedabero.tiledgame.utils.FileLoader;
@@ -15,11 +17,13 @@ import java.awt.Graphics;
  */
 public class World implements Updateable, Renderable {
 
+    private Game game;
     private int width, height;
     private int spawnX, spawnY;
     private int[][] map;
 
-    public World(String path) {
+    public World(Game game, String path) {
+        this.game = game;
         loadWorld(path);
 
     }
@@ -53,9 +57,13 @@ public class World implements Updateable, Renderable {
 
     @Override
     public void render(Graphics graphics) {
+        float xOffset = game.getGameCamera().getxOffset();
+        float yOffset = game.getGameCamera().getyOffset();
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
-                getTile(i, j).render(graphics, i * Tile.TILE_WIDTH, j * Tile.TILE_HEIGHT);
+                int xPos = (int) (i * Tile.TILE_WIDTH - xOffset);
+                int yPos = (int) (j * Tile.TILE_HEIGHT - yOffset);
+                getTile(i, j).render(graphics, xPos, yPos);
             }
         }
 

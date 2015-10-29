@@ -11,11 +11,8 @@ import java.awt.Graphics;
  */
 public class Player extends Creature {
 
-    private Game game;
-
     public Player(Game game, float x, float y) {
-        super(x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
-        this.game = game;
+        super(game, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
     }
 
     private void getInput() {
@@ -39,11 +36,14 @@ public class Player extends Creature {
     public void tick() {
         getInput();
         move();
+        game.getGameCamera().centerOnEntity(this);
     }
 
     @Override
     public void render(Graphics graphics) {
-        graphics.drawImage(Assets.player1, (int)position.x, (int)position.y, getSize().width, getSize().height, null);
+        int x = (int) (position.x - game.getGameCamera().getxOffset());
+        int y = (int) (position.y - game.getGameCamera().getyOffset());
+        graphics.drawImage(Assets.player1, x, y, getSize().width, getSize().height, null);
     }
 
 }
