@@ -1,11 +1,10 @@
 package com.jedabero.tiledgame.states;
 
-import com.jedabero.tiledgame.Game;
+import com.jedabero.tiledgame.GameHandler;
 import com.jedabero.tiledgame.entities.creatures.Player;
-import com.jedabero.tiledgame.tiles.TileManager;
 import com.jedabero.tiledgame.world.World;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 /**
  * GameState
@@ -16,10 +15,11 @@ public class GameState extends State {
     private Player player;
     private World world;
 
-    public GameState(Game game) {
-        super(game);
-        player = new Player(game, 100, 100);
-        world = new World(game, "res/worlds/world2.txt");
+    public GameState(GameHandler handler) {
+        super(handler);
+        world = new World(handler, "res/worlds/world2.txt");
+        handler.setWorld(world);
+        player = new Player(handler, 100, 100);
     }
 
     @Override

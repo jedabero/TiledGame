@@ -1,6 +1,6 @@
 package com.jedabero.tiledgame.states;
 
-import com.jedabero.tiledgame.Game;
+import com.jedabero.tiledgame.GameHandler;
 
 import java.awt.*;
 
@@ -10,8 +10,8 @@ import java.awt.*;
  */
 public class MenuState extends State {
 
-    public MenuState(Game game) {
-        super(game);
+    public MenuState(GameHandler handler) {
+        super(handler);
     }
 
     @Override

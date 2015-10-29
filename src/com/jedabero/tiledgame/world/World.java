@@ -1,9 +1,8 @@
 package com.jedabero.tiledgame.world;
 
-import com.jedabero.tiledgame.Game;
+import com.jedabero.tiledgame.GameHandler;
 import com.jedabero.tiledgame.common.Renderable;
 import com.jedabero.tiledgame.common.Updateable;
-import com.jedabero.tiledgame.gfx.GameCamera;
 import com.jedabero.tiledgame.tiles.Tile;
 import com.jedabero.tiledgame.tiles.TileManager;
 import com.jedabero.tiledgame.utils.FileLoader;
@@ -17,13 +16,13 @@ import java.awt.Graphics;
  */
 public class World implements Updateable, Renderable {
 
-    private Game game;
+    private GameHandler handler;
     private int width, height;
     private int spawnX, spawnY;
     private int[][] map;
 
-    public World(Game game, String path) {
-        this.game = game;
+    public World(GameHandler handler, String path) {
+        this.handler = handler;
         loadWorld(path);
 
     }
@@ -57,16 +56,16 @@ public class World implements Updateable, Renderable {
 
     @Override
     public void render(Graphics graphics) {
-        int firstXTile = (int) (game.getGameCamera().getxOffset() / Tile.TILE_WIDTH);
+        int firstXTile = (int) (handler.getGameCamera().getxOffset() / Tile.TILE_WIDTH);
         int xStart = Math.max(0, firstXTile);
-        int firstYTile = (int) (game.getGameCamera().getyOffset() / Tile.TILE_HEIGHT);
+        int firstYTile = (int) (handler.getGameCamera().getyOffset() / Tile.TILE_HEIGHT);
         int yStart = Math.max(0, firstYTile);
-        int lastXTile = (int) ((game.getGameCamera().getxOffset() + game.getWidth()) / Tile.TILE_WIDTH + 1);
+        int lastXTile = (int) ((handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILE_WIDTH + 1);
         int xEnd = Math.min(width,lastXTile);
-        int lastYTile = (int) ((game.getGameCamera().getyOffset() + game.getHeight()) / Tile.TILE_HEIGHT + 1);
+        int lastYTile = (int) ((handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILE_HEIGHT + 1);
         int yEnd = Math.min(height, lastYTile);
-        float xOffset = game.getGameCamera().getxOffset();
-        float yOffset = game.getGameCamera().getyOffset();
+        float xOffset = handler.getGameCamera().getxOffset();
+        float yOffset = handler.getGameCamera().getyOffset();
         for (int j = yStart; j < yEnd; j++) {
             for (int i = xStart; i < xEnd; i++) {
                 int xPos = (int) (i * Tile.TILE_WIDTH - xOffset);
