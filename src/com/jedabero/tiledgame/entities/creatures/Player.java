@@ -49,8 +49,8 @@ public class Player extends Creature {
         int y = (int) (this.y - handler.getGameCamera().getyOffset());
         graphics.drawImage(Assets.player1, x, y, width, height, null);
 
-        graphics.setColor(new Color(50, 50, 200, 140));
-        graphics.fillRect(x + bounds.x, y + bounds.y, bounds.width, bounds.height);
+        //graphics.setColor(new Color(50, 50, 200, 140));
+        //graphics.fillRect(x + bounds.x, y + bounds.y, bounds.width, bounds.height);
     }
 
 }

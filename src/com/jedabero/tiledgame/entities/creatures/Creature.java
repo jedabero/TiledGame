@@ -35,29 +35,41 @@ public abstract class Creature extends Entity {
 
     public void moveX() {
         int tx = (int) (x + xMove + bounds.x);
+        int snapX = -bounds.x;
         if (xMove > 0) {
-            tx += bounds.width - 1;
-        }/* else if (xMove < 0) { } */
+            tx += bounds.width;
+            snapX -= bounds.width + 1;
+        }else if (xMove < 0) {
+            snapX += Tile.TILE_WIDTH;
+        }
         tx /= Tile.TILE_WIDTH;
         int ty = (int) (y + bounds.y);
         int tyUp = ty / Tile.TILE_HEIGHT;
         int tyDown = (ty + bounds.height) / Tile.TILE_HEIGHT;
         if (!collisionWithSolidTile(tx, tyUp) && !collisionWithSolidTile(tx, tyDown)) {
             x += xMove;
+        } else {
+            x = tx * Tile.TILE_WIDTH + snapX;
         }
     }
 
     public void moveY() {
         int ty = (int) (y + yMove + bounds.y);
+        int snapY = -bounds.y;
         if (yMove > 0) {
-            ty += bounds.height - 1;
-        }/* else if (xMove < 0) { } */
+            ty += bounds.height;
+            snapY -= bounds.height + 1;
+        }else if (yMove < 0) {
+            snapY += Tile.TILE_HEIGHT;
+        }
         ty /= Tile.TILE_HEIGHT;
         int tx = (int) (x + bounds.x);
         int txLeft = tx / Tile.TILE_WIDTH;
         int txRight = (tx + bounds.width) / Tile.TILE_WIDTH;
         if (!collisionWithSolidTile(txLeft, ty) && !collisionWithSolidTile(txRight, ty)) {
             y += yMove;
+        } else {
+            y = ty * Tile.TILE_HEIGHT+ snapY;
         }
     }
 
