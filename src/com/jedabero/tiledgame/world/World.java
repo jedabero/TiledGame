@@ -43,10 +43,19 @@ public class World implements Updateable, Renderable {
     }
 
     public Tile getTile(int i, int j) {
+
+        if (isOutsideMap(i, j)) {
+            return TileManager.dirtTile;
+        }
+
         Tile tile = TileManager.tiles[map[i][j]];
         if (tile == null)
             return TileManager.dirtTile;
         return tile;
+    }
+
+    public boolean isOutsideMap(int x, int y) {
+        return x < 0 || y < 0 || x >= width || y >= height;
     }
 
     @Override

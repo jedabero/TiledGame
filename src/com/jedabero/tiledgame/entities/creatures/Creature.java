@@ -2,6 +2,7 @@ package com.jedabero.tiledgame.entities.creatures;
 
 import com.jedabero.tiledgame.GameHandler;
 import com.jedabero.tiledgame.entities.Entity;
+import com.jedabero.tiledgame.tiles.Tile;
 
 
 /**
@@ -28,8 +29,43 @@ public abstract class Creature extends Entity {
     }
 
     public void move() {
-        position.translate(xMove, yMove);
+        moveX();
+        moveY();
     }
+
+    public void moveX() {
+        int tx = (int) (x + xMove + bounds.x);
+        if (xMove > 0) {
+            tx += bounds.width - 1;
+        }/* else if (xMove < 0) { } */
+        tx /= Tile.TILE_WIDTH;
+        int ty = (int) (y + bounds.y);
+        int tyUp = ty / Tile.TILE_HEIGHT;
+        int tyDown = (ty + bounds.height) / Tile.TILE_HEIGHT;
+        if (!collisionWithSolidTile(tx, tyUp) && !collisionWithSolidTile(tx, tyDown)) {
+            x += xMove;
+        }
+    }
+
+    public void moveY() {
+        int ty = (int) (y + yMove + bounds.y);
+        if (yMove > 0) {
+            ty += bounds.height - 1;
+        }/* else if (xMove < 0) { } */
+        ty /= Tile.TILE_HEIGHT;
+        int tx = (int) (x + bounds.x);
+        int txLeft = tx / Tile.TILE_WIDTH;
+        int txRight = (tx + bounds.width) / Tile.TILE_WIDTH;
+        if (!collisionWithSolidTile(txLeft, ty) && !collisionWithSolidTile(txRight, ty)) {
+            y += yMove;
+        }
+    }
+
+
+    protected boolean collisionWithSolidTile(int x, int y) {
+        return handler.getWorld().getTile(x, y).isSolid();
+    }
+
 
     //G&S
 

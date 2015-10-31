@@ -1,9 +1,7 @@
 package com.jedabero.tiledgame.entities;
 
 import com.jedabero.tiledgame.GameHandler;
-import com.jedabero.tiledgame.common.Point;
-import com.jedabero.tiledgame.common.Renderable;
-import com.jedabero.tiledgame.common.Updateable;
+import com.jedabero.tiledgame.common.*;
 
 import java.awt.*;
 
@@ -14,37 +12,50 @@ import java.awt.*;
 public abstract class Entity implements Updateable, Renderable {
 
     protected GameHandler handler;
-    protected Point position;
-    protected Dimension size;
+    protected float x, y;
+    protected int width, height;
+
+    protected Rectangle bounds;
 
     public Entity(GameHandler game, float x, float y, int width, int height) {
         this.handler = game;
-        position = new Point(x, y);
-        size = new Dimension(width, height);
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        bounds = new Rectangle(width, height);
     }
 
-    public Point getPosition() {
-        return position;
+    public float getX() {
+        return x;
     }
 
-    public void setPositionX(float x) {
-        position.x = x;
+    public float getY() {
+        return y;
     }
 
-    public void setPositionY(float y) {
-        position.y = y;
+    public void setX(float x) {
+        this.x = x;
     }
 
-    public Dimension getSize() {
-        return size;
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public void setWidth(int width) {
-        size.width = width;
+        this.width = width;
     }
 
     public void setHeight(int height) {
-        size.height = height;
+        this.height = height;
     }
 
 }

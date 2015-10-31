@@ -13,6 +13,10 @@ public class Player extends Creature {
 
     public Player(GameHandler handler, float x, float y) {
         super(handler, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        bounds.x = 8;
+        bounds.y = 8;
+        bounds.width = 48;
+        bounds.height = 48;
     }
 
     private void getInput() {
@@ -41,9 +45,12 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics graphics) {
-        int x = (int) (position.x - handler.getGameCamera().getxOffset());
-        int y = (int) (position.y - handler.getGameCamera().getyOffset());
-        graphics.drawImage(Assets.player1, x, y, getSize().width, getSize().height, null);
+        int x = (int) (this.x - handler.getGameCamera().getxOffset());
+        int y = (int) (this.y - handler.getGameCamera().getyOffset());
+        graphics.drawImage(Assets.player1, x, y, width, height, null);
+
+        graphics.setColor(new Color(50, 50, 200, 140));
+        graphics.fillRect(x + bounds.x, y + bounds.y, bounds.width, bounds.height);
     }
 
 }
