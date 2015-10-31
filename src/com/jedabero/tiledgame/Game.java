@@ -83,7 +83,7 @@ public class Game implements Runnable {
     public void run() {
         init();
 
-        int fps = 30;
+        int fps = 60;
         double timePerTick = 1000000000 / fps;
         double delta = 0;
         long now;
@@ -99,16 +99,28 @@ public class Game implements Runnable {
             lastTime = now;
 
             if (delta >= 1) {
+                //System.out.println(String.format("Ticks and Frames: %d", ticks));
                 tick();
                 render();
                 delta--;
                 ticks++;
+            } else {
+                long sleepTime = (long)(timePerTick - diff - 1)/1000000;
+                //System.out.println(String.format("sleepTime: %d", sleepTime));
+                if (sleepTime > 0) {
+                    try {
+                        Thread.sleep(sleepTime);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                }
             }
             if (timer >= 1000000000){
-                System.out.println(String.format("Ticks and Frames: %d", ticks));
+                //System.out.println(String.format("Ticks and Frames: %d", ticks));
                 ticks = 0;
                 timer = 0;
             }
+            //System.out.println(String.format("Timer: %d", timer));
         }
 
         stop();
